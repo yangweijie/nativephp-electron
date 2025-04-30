@@ -1,0 +1,23 @@
+{  
+    "name": "yangweijie/thinkphp-electron",  
+    "description": "Electron wrapper for ThinkPHP applications",  
+    "keywords": ["thinkphp", "electron", "desktop"],  
+    "license": "MIT",  
+    "require": {  
+        "php": "^8.0",  
+        "topthink/framework": "^6.0",  
+        "ext-zip": "*"  
+    },  
+    "autoload": {  
+        "psr-4": {  
+            "yangweijie\\thinkElectron\\": "src/"  
+        }  
+    },  
+    "extra": {  
+        "think": {  
+            "services": [  
+                "yangweijie\\thinkElectron\\NativeService"  
+            ]  
+        }  
+    }  
+}
