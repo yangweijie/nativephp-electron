@@ -6,7 +6,9 @@
     "require": {  
         "php": "^8.0",  
         "topthink/framework": "^6.0",  
-        "ext-zip": "*"  
+        "ext-zip": "*",
+        "laravel/prompts": "^0.3.4",
+        "illuminate/process": "^11.41"  
     },  
     "autoload": {  
         "psr-4": {  
@@ -19,5 +21,7 @@
                 "yangweijie\\thinkElectron\\NativeService"  
             ]  
         }  
-    }  
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

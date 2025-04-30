@@ -1,5 +1,5 @@
 <?php  
-namespace yangweijie\ThinkElectron\facade;  
+namespace yangweijie\thinkElectron\facade;
   
 use think\Facade;  
   

@@ -1,12 +1,12 @@
 <?php  
-namespace YourNamespace\ThinkElectron\command;  
+namespace yangweijie\thinkElectron\command;
   
 use think\console\Command;  
 use think\console\Input;  
 use think\console\Output;  
-use YourNamespace\ThinkElectron\traits\Installer;  
+use yangweijie\thinkElectron\traits\Installer;
   
-class Install extends Command  
+class InstallCommand extends Command
 {  
     use Installer;  
   
