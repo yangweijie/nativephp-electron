@@ -5,7 +5,7 @@
     "license": "MIT",  
     "require": {  
         "php": "^8.0",  
-        "topthink/framework": "^6.0",  
+        "topthink/framework": "^6.0｜^8.0",
         "ext-zip": "*",
         "laravel/prompts": "^0.3.4",
         "illuminate/process": "^11.41"  
