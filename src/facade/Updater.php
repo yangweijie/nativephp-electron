@@ -1,5 +1,5 @@
 <?php  
-namespace yangweijie\thinkElectron\facade;
+namespace native\thinkElectron\facade;
   
 use think\Facade;
 
@@ -11,6 +11,6 @@ class Updater extends Facade
 {  
     protected static function getFacadeClass(): string
     {  
-        return 'electron.updater';  
+        return 'nativephp.updater';
     }  
 }

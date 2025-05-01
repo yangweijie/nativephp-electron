@@ -1,15 +1,15 @@
 <?php
 
-namespace yangweijie\thinkElectron\command;
+namespace native\thinkElectron\command;
 
+use native\thinkElectron\traits\LaravelCommand;
 use think\console\Command;
 use Illuminate\Support\Facades\Process;
 use Illuminate\Support\Str;
-use yangweijie\thinkElectron\concerns\LocatesPhpBinary;
-use yangweijie\thinkElectron\facade\Updater;
-use yangweijie\thinkElectron\traits\InstallsAppIcon;
-use yangweijie\thinkElectron\traits\LaravelCommand;
-use yangweijie\thinkElectron\traits\OsAndArch;
+use native\thinkElectron\concerns\LocatesPhpBinary;
+use native\thinkElectron\facade\Updater;
+use native\thinkElectron\traits\InstallsAppIcon;
+use native\thinkElectron\traits\OsAndArch;
 
 class BuildCommand extends Command
 {
@@ -18,7 +18,7 @@ class BuildCommand extends Command
     use LocatesPhpBinary;
     use OsAndArch;
 
-    protected $signature = 'native:build
+    protected string $signature = 'native:build
         {os? : The operating system to build for (all, linux, mac, win)}
         {arch? : The Processor Architecture to build for (x64, x86, arm64)}
         {--publish : to publish the app}';

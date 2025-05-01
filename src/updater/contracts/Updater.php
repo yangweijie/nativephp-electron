@@ -1,6 +1,6 @@
 <?php
 
-namespace yangweijie\thinkElectron\updater\contracts;
+namespace native\thinkElectron\updater\contracts;
 
 interface Updater
 {

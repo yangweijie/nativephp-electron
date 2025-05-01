@@ -1,6 +1,6 @@
 <?php
 
-namespace yangweijie\thinkElectron\updater;
+namespace native\thinkElectron\updater;
 
 
 use yangweijie\thinkElectron\updater\contracts\Updater;

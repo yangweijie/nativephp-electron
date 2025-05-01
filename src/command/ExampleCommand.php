@@ -1,9 +1,9 @@
 <?php
 
-namespace yangweijie\thinkElectron\command;
+namespace native\thinkElectron\command;
 
 use think\console\Command;
-use yangweijie\thinkElectron\traits\LaravelCommand;
+use native\thinkElectron\traits\LaravelCommand;
 
 class ExampleCommand extends Command
 {
@@ -14,14 +14,14 @@ class ExampleCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'electron:example {name : 示例参数} {--force : 是否强制执行}'; 
+    protected string $signature = 'electron:example {name : 示例参数} {--force : 是否强制执行}';
     
     /**
      * 命令描述
      *
      * @var string
      */
-    protected $description = '这是一个使用LaravelCommand trait的示例命令';
+    protected string $description = '这是一个使用LaravelCommand trait的示例命令';
     
     /**
      * 执行命令

@@ -1,6 +1,6 @@
 <?php
 
-namespace yangweijie\thinkElectron\traits;
+namespace native\thinkElectron\traits;
 
 use function Laravel\Prompts\intro;
 use function Laravel\Prompts\note;

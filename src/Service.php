@@ -1,14 +1,14 @@
 <?php
-namespace yangweijie\thinkElectron;
+namespace native\thinkElectron;
   
 use think\Service as BaseService;
-use yangweijie\thinkElectron\command\BuildCommand;
-use yangweijie\thinkElectron\command\DevelopCommand;
-use yangweijie\thinkElectron\command\InstallCommand;
-use yangweijie\thinkElectron\command\PublishCommand;
-use yangweijie\thinkElectron\command\VendorPublishCommand;
-use yangweijie\thinkElectron\traits\LaravelService;
-use yangweijie\thinkElectron\updater\UpdaterManager;
+use native\thinkElectron\command\BuildCommand;
+use native\thinkElectron\command\DevelopCommand;
+use native\thinkElectron\command\InstallCommand;
+use native\thinkElectron\command\PublishCommand;
+use native\thinkElectron\command\VendorPublishCommand;
+use native\thinkElectron\traits\LaravelService;
+use native\thinkElectron\updater\UpdaterManager;
 
 class Service extends BaseService  
 {  
@@ -16,7 +16,7 @@ class Service extends BaseService
     public function register(): void
     {  
         // 注册配置  
-        $this->app->bind('electron.updater', function () {  
+        $this->app->bind('nativephp.updater', function () {
             return new UpdaterManager($this->app);  
         });  
     }
@@ -37,7 +37,7 @@ class Service extends BaseService
 
         // 发布配置
         $this->publishes([
-            __DIR__ . '/../config/electron.php' => config_path('electron.php')
-        ], 'electron-config');
+            __DIR__ . '/../config/config.php' => config_path('nativephp.php')
+        ]);
     }
 }

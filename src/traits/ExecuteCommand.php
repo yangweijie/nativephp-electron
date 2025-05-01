@@ -1,10 +1,10 @@
 <?php
 
-namespace yangweijie\thinkElectron\traits;
+namespace native\thinkElectron\traits;
 
 use Illuminate\Support\Facades\Process;
 
-use yangweijie\thinkElectron\concerns\LocatesPhpBinary;
+use native\thinkElectron\concerns\LocatesPhpBinary;
 use function Laravel\Prompts\note;
 
 trait ExecuteCommand

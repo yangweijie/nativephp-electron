@@ -1,13 +1,10 @@
 <?php
 
-namespace yangweijie\thinkElectron\command;
+namespace native\thinkElectron\command;
 
 use think\console\Command;
-use think\console\Input;
-use think\console\input\Option;
-use think\console\Output;
-use yangweijie\thinkElectron\traits\LaravelCommand;
-use yangweijie\thinkElectron\traits\LaravelService;
+use native\thinkElectron\traits\LaravelCommand;
+use native\thinkElectron\traits\LaravelService;
 
 class VendorPublishCommand extends Command
 {
@@ -18,7 +15,7 @@ class VendorPublishCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'vendor:publish 
+    protected string $signature = 'vendor:publish 
                             {--force : 强制覆盖已存在的文件}
                             {--provider= : 指定服务提供者}
                             {--tag= : 指定标签}';
@@ -28,14 +25,14 @@ class VendorPublishCommand extends Command
      *
      * @var string
      */
-    protected $description = '发布服务提供者的资源文件';
+    protected string $description = '发布服务提供者的资源文件';
 
     /**
      * 执行命令
      *
      * @return void
      */
-    public function handle()
+    public function handle(): void
     {
         $provider = $this->option('provider');
         $tag = $this->option('tag');

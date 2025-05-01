@@ -1,13 +1,12 @@
 <?php
 
-namespace yangweijie\thinkElectron\command;
+namespace native\thinkElectron\command;
 
 use think\facade\Console;
 use think\console\Command;
-use Illuminate\Support\Facades\Artisan;
-use yangweijie\thinkElectron\concerns\LocatesPhpBinary;
-use yangweijie\thinkElectron\traits\LaravelCommand;
-use yangweijie\thinkElectron\traits\OsAndArch;
+use native\thinkElectron\concerns\LocatesPhpBinary;
+use native\thinkElectron\traits\LaravelCommand;
+use native\thinkElectron\traits\OsAndArch;
 
 class PublishCommand extends Command
 {
@@ -15,7 +14,7 @@ class PublishCommand extends Command
     use LocatesPhpBinary;
     use OsAndArch;
 
-    protected $signature = 'native:publish
+    protected string $signature = 'native:publish
         {os? : The operating system to build for (linux, mac, win)}
         {arch? : The Processor Architecture to build for (x64, x86, arm64)}';
 

@@ -12,13 +12,13 @@
     },  
     "autoload": {  
         "psr-4": {  
-            "yangweijie\\thinkElectron\\": "src/"  
+            "native\\thinkElectron\\": "src/"
         }  
     },  
     "extra": {  
         "think": {  
             "services": [  
-                "yangweijie\\thinkElectron\\NativeService"  
+                "native\\thinkElectron\\NativeService"
             ]  
         }  
     },

@@ -1,9 +1,9 @@
 <?php
 
-namespace yangweijie\thinkElectron\updater;
+namespace native\thinkElectron\updater;
 
 
-use yangweijie\thinkElectron\updater\contracts\Updater;
+use native\thinkElectron\updater\contracts\Updater;
 
 class GitHubProvider implements Updater
 {

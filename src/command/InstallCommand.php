@@ -1,12 +1,12 @@
 <?php
 
-namespace yangweijie\thinkElectron\command;
+namespace native\thinkElectron\command;
 
 use RuntimeException;
 use think\console\Command;
 
-use yangweijie\thinkElectron\traits\Installer;
-use yangweijie\thinkElectron\traits\LaravelCommand;
+use native\thinkElectron\traits\Installer;
+use native\thinkElectron\traits\LaravelCommand;
 use function Laravel\Prompts\confirm;
 use function Laravel\Prompts\info;
 use function Laravel\Prompts\intro;
@@ -18,11 +18,11 @@ class InstallCommand extends Command
     use LaravelCommand;
     use Installer;
 
-    protected $signature = 'native:install
+    protected string $signature = 'native:install
         {--force : Overwrite existing files by default}
         {--installer=npm : The package installer to use: npm, yarn or pnpm}';
 
-    protected $description = 'Install all of the NativePHP resources';
+    protected string $description = 'Install all of the NativePHP resources';
 
     public function handle(): void
     {
