@@ -1,45 +1,91 @@
-<?php  
+<?php
+
 namespace yangweijie\thinkElectron\command;
-  
-use think\console\Command;  
-use think\console\Input;  
-use think\console\Output;  
+
+use RuntimeException;
+use think\console\Command;
+
 use yangweijie\thinkElectron\traits\Installer;
-  
+use yangweijie\thinkElectron\traits\LaravelCommand;
+use function Laravel\Prompts\confirm;
+use function Laravel\Prompts\info;
+use function Laravel\Prompts\intro;
+use function Laravel\Prompts\note;
+use function Laravel\Prompts\outro;
+
 class InstallCommand extends Command
-{  
-    use Installer;  
-  
-    protected function configure()  
-    {  
-        $this->setName('electron:install')  
-            ->setDescription('Install all of the Electron resources')  
-            ->addOption('force', null, null, 'Overwrite existing files')  
-            ->addOption('installer', null, null, 'The package installer to use: npm, yarn or pnpm');  
-    }  
-  
-    protected function execute(Input $input, Output $output)  
-    {  
-        // 参考原InstallCommand实现安装逻辑  
-        // 但使用ThinkPHP的API  
+{
+    use LaravelCommand;
+    use Installer;
+
+    protected $signature = 'native:install
+        {--force : Overwrite existing files by default}
+        {--installer=npm : The package installer to use: npm, yarn or pnpm}';
+
+    protected $description = 'Install all of the NativePHP resources';
+
+    public function handle(): void
+    {
+        intro('Publishing NativePHP Service Provider...');
+
+        $withoutInteraction = $this->option('no-interaction');
+
+        $this->call('vendor:publish', ['--tag' => 'nativephp-provider']);
+        $this->call('vendor:publish', ['--tag' => 'nativephp-config']);
+
+        $this->installComposerScript();
+
+        $installer = $this->getInstaller($this->option('installer'), $withoutInteraction);
+
+        $this->installNPMDependencies(
+            force: $this->option('force'),
+            installer: $installer,
+            withoutInteraction: $withoutInteraction
+        );
+
+        $shouldPromptForServe = ! $withoutInteraction && ! $this->option('force');
+
+        if ($shouldPromptForServe && confirm('Would you like to start the NativePHP development server', false)) {
+            $this->call('native:serve', [
+                '--installer' => $installer,
+                '--no-dependencies',
+                '--no-interaction' => $withoutInteraction,
+            ]);
+        }
+
+        outro('NativePHP scaffolding installed successfully.');
     }
-    
-    // 在InstallCommand中  
-    private function installComposerScript()  
-    {  
-        // 读取和修改composer.json来添加命令  
-        $composerJson = json_decode(file_get_contents(root_path('composer.json')), true);  
-        
-        // 添加命令  
-        $composerJson['scripts']['electron:dev'] = [  
-            'Composer\\Config::disableProcessTimeout',   
-            'npx concurrently -k "php think electron:serve" "npm run dev"'  
-        ];  
-        
-        // 保存修改  
-        file_put_contents(  
-            root_path('composer.json'),  
-            json_encode($composerJson, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)  
-        );  
+
+    /**
+     * @throws \Throwable
+     */
+    private function installComposerScript(): void
+    {
+        info('Installing `composer native:dev` script alias...');
+
+        $composer = json_decode(file_get_contents(base_path('composer.json')));
+        throw_unless($composer, RuntimeException::class, "composer.json couldn't be parsed");
+
+        $composerScripts = $composer->scripts ?? (object) [];
+
+        if ($composerScripts->{'native:dev'} ?? false) {
+            note('native:dev script already installed... skipping.');
+
+            return;
+        }
+
+        $composerScripts->{'native:dev'} = [
+            'Composer\\Config::disableProcessTimeout',
+            'npx concurrently -k -c "#93c5fd,#c4b5fd" "php artisan native:serve --no-interaction" "npm run dev" --names=app,vite',
+        ];
+
+        data_set($composer, 'scripts', $composerScripts);
+
+        file_put_contents(
+            base_path('composer.json'),
+            json_encode($composer, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES).PHP_EOL
+        );
+
+        note('native:dev script installed!');
     }
 }
