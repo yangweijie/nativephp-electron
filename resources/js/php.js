@@ -60,42 +60,45 @@ console.log('Binary Filename: ', platform.phpBinary);
 console.log('PHP version: ' + phpVersion);
 
 if (platform.phpBinary) {
-    try {
-        console.log('Unzipping PHP binary from ' + binarySrcDir + ' to ' + binaryDestDir);
-        removeSync(binaryDestDir);
+    const binaryPath = join(binaryDestDir, platform.phpBinary);
+    if(!fs.existsSync(binaryPath)){
+        try {
+            console.log('Unzipping PHP binary from ' + binarySrcDir + ' to ' + binaryDestDir);
+            removeSync(binaryDestDir);
 
-        ensureDirSync(binaryDestDir);
+            ensureDirSync(binaryDestDir);
 
-        // Unzip the files
-        unzip.open(binarySrcDir, {lazyEntries: true}, function (err, zipfile) {
-            if (err) throw err;
-            zipfile.readEntry();
-            zipfile.on("entry", function (entry) {
-                zipfile.openReadStream(entry, function (err, readStream) {
-                    if (err) throw err;
+            // Unzip the files
+            unzip.open(binarySrcDir, {lazyEntries: true}, function (err, zipfile) {
+                if (err) throw err;
+                zipfile.readEntry();
+                zipfile.on("entry", function (entry) {
+                    zipfile.openReadStream(entry, function (err, readStream) {
+                        if (err) throw err;
 
-                    const binaryPath = join(binaryDestDir, platform.phpBinary);
-                    const writeStream = fs.createWriteStream(binaryPath);
+                        const binaryPath = join(binaryDestDir, platform.phpBinary);
+                        const writeStream = fs.createWriteStream(binaryPath);
 
-                    readStream.pipe(writeStream);
+                        readStream.pipe(writeStream);
 
-                    writeStream.on("close", function() {
-                        console.log('Copied PHP binary to ', binaryPath);
+                        writeStream.on("close", function() {
+                            console.log('Copied PHP binary to ', binaryPath);
 
-                        // Add execute permissions
-                        fs.chmod(binaryPath, 0o755, (err) => {
-                            if (err) {
-                                console.log(`Error setting permissions: ${err}`);
-                            }
+                            // Add execute permissions
+                            fs.chmod(binaryPath, 0o755, (err) => {
+                                if (err) {
+                                    console.log(`Error setting permissions: ${err}`);
+                                }
+                            });
+
+                            zipfile.readEntry();
                         });
-
-                        zipfile.readEntry();
                     });
                 });
             });
-        });
-    } catch (e) {
-        console.error('Error copying PHP binary', e);
+        } catch (e) {
+            console.error('Error copying PHP binary', e);
+        }
     }
 }
 

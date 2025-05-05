@@ -75,7 +75,7 @@ class DevelopCommand extends Command
         $packageJsonPath = __DIR__.'/../../resources/js/package.json';
         $packageJson = json_decode(file_get_contents($packageJsonPath), true);
 
-        $packageJson['name'] = config('app.name');
+        $packageJson['name'] = config('app.name', 'NativePHP');
 
         file_put_contents($packageJsonPath, json_encode($packageJson, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
     }

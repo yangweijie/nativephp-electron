@@ -25,6 +25,11 @@ composer require yangweijie/thinkphp-electron
 
 ## 特性
 
+## electron 加速下载
+
+~~~
+DEBUG=* ELECTRON_MIRROR="https://npmmirror.com/mirrors/electron/" bun add electron -f
+~~~
 ### LaravelCommand Trait
 
 本扩展包提供了一个 `LaravelCommand` trait，用于将 Laravel 风格的命令适配到 ThinkPHP 命令系统。使用此 trait，您可以轻松地将原有的 Laravel 命令类迁移到 ThinkPHP 框架中。

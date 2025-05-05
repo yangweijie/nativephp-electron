@@ -22,7 +22,7 @@ class InstallCommand extends Command
     {
         $this->signature = 'native:install
         {--force : Overwrite existing files by default}
-        {--installer=npm : The package installer to use: npm, yarn or pnpm}';
+        {--installer=bun : The package installer to use: npm, yarn or pnpm}';
         $this->description = 'Install all of the NativePHP resources';
         parent::__construct();
     }
@@ -30,15 +30,21 @@ class InstallCommand extends Command
     public function handle(): void
     {
         intro('Publishing NativePHP Service Provider...');
-
         $withoutInteraction = $this->option('no-interaction');
-
-        $this->call('vendor:pub', ['--tag' => 'nativephp-provider']);
-        $this->call('vendor:pub', ['--tag' => 'nativephp-config']);
+        $config_file = __DIR__.'/../../config/nativephp.php';
+        $to = config_path().'nativephp.php';
+        if(is_file(base_path('config/nativephp.php'))){
+            if(confirm('The nativephp.php already exists, need to overwrite?', true)){
+                copy($config_file, $to);
+                $this->output->newLine();
+            }
+        }else{
+            copy( $config_file, $to);
+        }
 
         $this->installComposerScript();
 
-        $installer = $this->getInstaller($this->option('installer'), $withoutInteraction);
+        $installer = $this->getInstaller($this->option('installer'));
 
         $this->installNPMDependencies(
             force: $this->option('force'),
@@ -66,7 +72,7 @@ class InstallCommand extends Command
     {
         info('Installing `composer native:dev` script alias...');
 
-        $composer = json_decode(file_get_contents(base_path('composer.json')));
+        $composer = json_decode(file_get_contents(root_path().'composer.json'));
         throw_unless($composer, RuntimeException::class, "composer.json couldn't be parsed");
 
         $composerScripts = $composer->scripts ?? (object) [];
@@ -85,7 +91,7 @@ class InstallCommand extends Command
         data_set($composer, 'scripts', $composerScripts);
 
         file_put_contents(
-            base_path('composer.json'),
+            root_path().'composer.json',
             json_encode($composer, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES).PHP_EOL
         );
 

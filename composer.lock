@@ -5780,7 +5780,7 @@
             "dist": {
                 "type": "path",
                 "url": "../nativephp-thinkphp",
-                "reference": "17b8c1c37ab428deab4e62951dd73cb09f2f2b47"
+                "reference": "10077dbccfa77fe94b64a43f917ace4650f3423e"
             },
             "require": {
                 "ext-mbstring": "*",
@@ -5838,7 +5838,7 @@
             "dist": {
                 "type": "path",
                 "url": "../thinkphp-package-tools",
-                "reference": "cbfdebddb9e88f01883f3f8478195defdbf9c515"
+                "reference": "bae28cf0d87b0e2de6ed6f708ed8a68a64979a57"
             },
             "require": {
                 "illuminate/broadcasting": "^10.0|^11.0|^12.0",

@@ -2,6 +2,6 @@
 
 return [
     'hot_reload' => [
-        root_path('app/Providers/NativeAppServiceProvider.php'),
+        root_path('app').'provider.php',
     ],
 ];

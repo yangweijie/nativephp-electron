@@ -2,9 +2,9 @@
 
 namespace native\thinkElectron\traits;
 
-use Illuminate\Support\Facades\Process;
 
 use native\thinkElectron\concerns\LocatesPhpBinary;
+use native\thinkElectron\facade\Process;
 use function Laravel\Prompts\note;
 
 trait ExecuteCommand
@@ -21,13 +21,13 @@ trait ExecuteCommand
             'install' => [
                 'NATIVEPHP_PHP_BINARY_VERSION' => PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION,
                 'NATIVEPHP_PHP_BINARY_PATH' => root_path($this->phpBinaryPath()),
-                'NATIVEPHP_CERTIFICATE_FILE_PATH' => root_path($this->binaryPackageDirectory().'cacert.pem'),
+                'NATIVEPHP_CERTIFICATE_FILE_PATH' => root_path($this->binaryPackageDirectory()).'cacert.pem',
             ],
             'serve' => [
                 'APP_PATH' => root_path(),
                 'NATIVEPHP_PHP_BINARY_VERSION' => PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION,
                 'NATIVEPHP_PHP_BINARY_PATH' => root_path($this->phpBinaryPath()),
-                'NATIVEPHP_CERTIFICATE_FILE_PATH' => root_path($this->binaryPackageDirectory().'cacert.pem'),
+                'NATIVEPHP_CERTIFICATE_FILE_PATH' => root_path($this->binaryPackageDirectory()).'cacert.pem',
                 'NATIVE_PHP_SKIP_QUEUE' => $skip_queue,
                 'NATIVEPHP_BUILDING' => false,
             ],

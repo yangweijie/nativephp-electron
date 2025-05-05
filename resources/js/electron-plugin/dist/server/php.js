@@ -16,7 +16,7 @@ import { app } from 'electron';
 import { execFile, spawn } from 'child_process';
 import state from "./state";
 import getPort from 'get-port';
-const storagePath = join(app.getPath('userData'), 'storage');
+const storagePath = join(app.getPath('userData'), 'runtime', 'storage');
 const databasePath = join(app.getPath('userData'), 'database');
 const databaseFile = join(databasePath, 'database.sqlite');
 const argumentEnv = getArgumentEnv();
@@ -40,7 +40,7 @@ function retrievePhpIniSettings() {
             cwd: appPath,
             env
         };
-        return yield promisify(execFile)(state.php, ['artisan', 'native:php-ini'], phpOptions);
+        return yield promisify(execFile)(state.php, ['think', 'native:php-ini'], phpOptions);
     });
 }
 function retrieveNativePHPConfig() {
@@ -54,7 +54,7 @@ function retrieveNativePHPConfig() {
             cwd: appPath,
             env
         };
-        return yield promisify(execFile)(state.php, ['artisan', 'native:config'], phpOptions);
+        return yield promisify(execFile)(state.php, ['think', 'native:config'], phpOptions);
     });
 }
 function callPhp(args, options, phpIniSettings = {}) {
@@ -150,7 +150,7 @@ function getDefaultPhpIniSettings() {
 function serveApp(secret, apiPort, phpIniSettings) {
     return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
         const appPath = getAppPath();
-        console.log('Starting PHP server...', `${state.php} artisan serve`, appPath, phpIniSettings);
+        console.log('Starting PHP server...', `${state.php} think serve`, appPath, phpIniSettings);
         ensureAppFoldersAreAvailable();
         console.log('Making sure app folders are available');
         const env = getDefaultEnvironmentVariables(secret, apiPort);
@@ -159,18 +159,18 @@ function serveApp(secret, apiPort, phpIniSettings) {
             env
         };
         const store = new Store();
-        callPhp(['artisan', 'storage:link', '--force'], phpOptions, phpIniSettings);
-        if (store.get('migrated_version') !== app.getVersion() && process.env.NODE_ENV !== 'development') {
-            console.log('Migrating database...');
-            callPhp(['artisan', 'migrate', '--force'], phpOptions, phpIniSettings);
-            store.set('migrated_version', app.getVersion());
-        }
+        // callPhp(['artisan', 'storage:link', '--force'], phpOptions, phpIniSettings);
+        // if (store.get('migrated_version') !== app.getVersion() && process.env.NODE_ENV !== 'development') {
+        //     console.log('Migrating database...');
+        //     callPhp(['artisan', 'migrate', '--force'], phpOptions, phpIniSettings);
+        //     store.set('migrated_version', app.getVersion());
+        // }
         if (process.env.NODE_ENV === 'development') {
             console.log('Skipping Database migration while in development.');
             console.log('You may migrate manually by running: php artisan native:migrate');
         }
         const phpPort = yield getPhpPort();
-        const serverPath = join(appPath, 'vendor', 'laravel', 'framework', 'src', 'Illuminate', 'Foundation', 'resources', 'server.php');
+        const serverPath = join(appPath, 'think');
         const phpServer = callPhp(['-S', `127.0.0.1:${phpPort}`, serverPath], {
             cwd: join(appPath, 'public'),
             env
