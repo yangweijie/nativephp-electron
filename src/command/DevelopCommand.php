@@ -7,7 +7,7 @@ use think\console\Command;
 use native\thinkElectron\traits\Developer;
 use native\thinkElectron\traits\Installer;
 use native\thinkElectron\traits\InstallsAppIcon;
-use native\thinkElectron\traits\LaravelCommand;
+use yangweijie\thinkphpPackageTools\adapter\laravel\LaravelCommand;
 use function Laravel\Prompts\intro;
 use function Laravel\Prompts\note;
 
@@ -16,7 +16,10 @@ class DevelopCommand extends Command
     use LaravelCommand;
     use Developer, Installer, InstallsAppIcon;
 
-    protected string $signature = 'native:serve {--no-queue} {--D|no-dependencies} {--installer=npm}';
+    public function __construct(){
+        $this->signature = 'native:serve {--no-queue} {--D|no-dependencies} {--installer=bun}';
+        parent::__construct();
+    }
 
     public function handle(): void
     {

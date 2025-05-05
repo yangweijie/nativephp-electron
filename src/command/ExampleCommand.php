@@ -3,19 +3,18 @@
 namespace native\thinkElectron\command;
 
 use think\console\Command;
-use native\thinkElectron\traits\LaravelCommand;
+use yangweijie\thinkphpPackageTools\adapter\laravel\LaravelCommand;
 
 class ExampleCommand extends Command
 {
     use LaravelCommand;
-    
-    /**
-     * 命令签名
-     *
-     * @var string
-     */
-    protected string $signature = 'electron:example {name : 示例参数} {--force : 是否强制执行}';
-    
+
+    public function __construct()
+    {
+        $this->signature = 'electron:example {name : 示例参数} {--force : 是否强制执行}';
+        parent::__construct();
+    }
+
     /**
      * 命令描述
      *

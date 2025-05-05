@@ -3,22 +3,20 @@
 namespace native\thinkElectron\command;
 
 use think\console\Command;
-use native\thinkElectron\traits\LaravelCommand;
-use native\thinkElectron\traits\LaravelService;
+use yangweijie\thinkphpPackageTools\adapter\laravel\LaravelCommand;
+use yangweijie\thinkphpPackageTools\adapter\laravel\LaravelService;
 
 class VendorPublishCommand extends Command
 {
     use LaravelCommand;
 
-    /**
-     * 命令签名
-     *
-     * @var string
-     */
-    protected string $signature = 'vendor:publish 
+    public function __construct(){
+        $this->signature = 'vendor:publish 
                             {--force : 强制覆盖已存在的文件}
                             {--provider= : 指定服务提供者}
                             {--tag= : 指定标签}';
+        parent::__construct();
+    }
 
     /**
      * 命令描述

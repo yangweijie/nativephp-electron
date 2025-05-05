@@ -53,7 +53,7 @@ class YourCommand extends Command
 }
 ```
 
-更多详细信息，请查看 [LaravelCommand 使用说明](src/traits/README.md)。
+更多详细信息，请查看 [LaravelCommand 使用说明](../thinkphp-package-tools/src/adapter/laravel/README.md)。
 
 ## 使用
 

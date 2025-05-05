@@ -5,13 +5,29 @@
     "license": "MIT",  
     "require": {  
         "php": "^8.0",  
-        "topthink/framework": "^6.1.6｜^8.0",
         "ext-zip": "*",
         "laravel/prompts": "^0.3.4",
-        "illuminate/process": "^11.41",
-        "yangweijie/thinkphp-native": "*",
-        "nativephp/php-bin": "^0.5"
-    },  
+        "yangweijie/native-thinkphp": "*",
+        "nativephp/php-bin": "^0.5",
+        "yangweijie/thinkphp-package-tools": "dev-main"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../nativephp-thinkphp"
+        },
+        {
+            "type": "git",
+            "package": {
+                "name": "yangweijie/thinkphp-package-tools",
+                "source": {
+                    "url": "https://github.com/yangweijie/thinkphp-package-tools.git",
+                    "type": "git"
+                }
+            },
+            "url": "https://github.com/yangweijie/thinkphp-package-tools.git"
+        }
+    ],
     "autoload": {  
         "psr-4": {  
             "native\\thinkElectron\\": "src/"

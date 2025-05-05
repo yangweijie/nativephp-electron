@@ -11,7 +11,7 @@ trait Installer
 {
     use ExecuteCommand;
 
-    protected function installNPMDependencies(bool $force, ?string $installer = 'npm', bool $withoutInteraction = false): void
+    protected function installNPMDependencies(bool $force, ?string $installer = 'bun', bool $withoutInteraction = false): void
     {
         $shouldPrompt = $force || $withoutInteraction;
 
@@ -31,7 +31,7 @@ trait Installer
     {
         [$installer, $command] = $this->getInstallerAndCommand(installer: $installer);
 
-        note("Installing NPM dependencies using the {$installer} package manager...");
+        note("Installing bun dependencies using the {$installer} package manager...");
         $this->executeCommand(command: $command, withoutInteraction: $withoutInteraction);
     }
 

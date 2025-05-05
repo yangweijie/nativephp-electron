@@ -2,7 +2,6 @@
 
 namespace native\thinkElectron\command;
 
-use native\thinkElectron\traits\LaravelCommand;
 use think\console\Command;
 use Illuminate\Support\Facades\Process;
 use Illuminate\Support\Str;
@@ -10,6 +9,7 @@ use native\thinkElectron\concerns\LocatesPhpBinary;
 use native\thinkElectron\facade\Updater;
 use native\thinkElectron\traits\InstallsAppIcon;
 use native\thinkElectron\traits\OsAndArch;
+use yangweijie\thinkphpPackageTools\adapter\laravel\LaravelCommand;
 
 class BuildCommand extends Command
 {
@@ -18,12 +18,15 @@ class BuildCommand extends Command
     use LocatesPhpBinary;
     use OsAndArch;
 
-    protected string $signature = 'native:build
+    public function __construct(){
+        $this->signature = 'native:build
         {os? : The operating system to build for (all, linux, mac, win)}
         {arch? : The Processor Architecture to build for (x64, x86, arm64)}
         {--publish : to publish the app}';
+        parent::__construct();
+    }
 
-    protected $availableOs = ['win', 'linux', 'mac', 'all'];
+    protected array $availableOs = ['win', 'linux', 'mac', 'all'];
 
     public function handle(): void
     {
