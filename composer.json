@@ -17,15 +17,8 @@
             "url": "../nativephp-thinkphp"
         },
         {
-            "type": "git",
-            "package": {
-                "name": "yangweijie/thinkphp-package-tools",
-                "source": {
-                    "url": "https://github.com/yangweijie/thinkphp-package-tools.git",
-                    "type": "git"
-                }
-            },
-            "url": "https://github.com/yangweijie/thinkphp-package-tools.git"
+            "type": "path",
+            "url": "../thinkphp-package-tools"
         }
     ],
     "autoload": {  

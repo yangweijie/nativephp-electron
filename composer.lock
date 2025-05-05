@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "01cbf0181c477adfec7658f58b27afcf",
+    "content-hash": "e617a5c303a06fd8dc4a5ba45b79503f",
     "packages": [
         {
             "name": "brick/math",
@@ -5780,7 +5780,7 @@
             "dist": {
                 "type": "path",
                 "url": "../nativephp-thinkphp",
-                "reference": "97b4c16c458f00e76462da2f5e2564f4683182ec"
+                "reference": "17b8c1c37ab428deab4e62951dd73cb09f2f2b47"
             },
             "require": {
                 "ext-mbstring": "*",
@@ -5835,10 +5835,10 @@
         {
             "name": "yangweijie/thinkphp-package-tools",
             "version": "dev-main",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/yangweijie/thinkphp-package-tools.git",
-                "reference": "ece9f01155e14bae7cd43e41d6a94351e0fd86c3"
+            "dist": {
+                "type": "path",
+                "url": "../thinkphp-package-tools",
+                "reference": "cbfdebddb9e88f01883f3f8478195defdbf9c515"
             },
             "require": {
                 "illuminate/broadcasting": "^10.0|^11.0|^12.0",
@@ -5852,7 +5852,6 @@
                 "topthink/framework": "^v6.1 | ^v8.0",
                 "vlucas/phpdotenv": "^5.6"
             },
-            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -5878,7 +5877,9 @@
                 "thinkphp-package-tools",
                 "yangweijie"
             ],
-            "time": "2025-05-04T16:42:48+00:00"
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "yzh52521/easyhttp",

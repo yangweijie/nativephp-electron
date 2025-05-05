@@ -23,10 +23,9 @@ class InstallCommand extends Command
         $this->signature = 'native:install
         {--force : Overwrite existing files by default}
         {--installer=npm : The package installer to use: npm, yarn or pnpm}';
+        $this->description = 'Install all of the NativePHP resources';
         parent::__construct();
     }
-
-    protected string $description = 'Install all of the NativePHP resources';
 
     public function handle(): void
     {
@@ -34,8 +33,8 @@ class InstallCommand extends Command
 
         $withoutInteraction = $this->option('no-interaction');
 
-        $this->call('vendor:publish', ['--tag' => 'nativephp-provider']);
-        $this->call('vendor:publish', ['--tag' => 'nativephp-config']);
+        $this->call('vendor:pub', ['--tag' => 'nativephp-provider']);
+        $this->call('vendor:pub', ['--tag' => 'nativephp-config']);
 
         $this->installComposerScript();
 
