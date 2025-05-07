@@ -39,16 +39,6 @@ class NativeService extends PackageService
     public function bootingPackage(): void
     {  
         // 注册命令  
-//        if ($this->app->runningInConsole()) {
-//            $this->commands([
-//                // 移植后的命令类
-//                BuildCommand::class,
-//                DevelopCommand::class,
-//                InstallCommand::class,
-//                PublishCommand::class,
-//                VendorPublishCommand::class,
-//            ]);
-//        }
 
         // 发布配置
 //        $this->publishes([

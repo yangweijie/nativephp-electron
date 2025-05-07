@@ -1,4 +1,6 @@
+// 从 'electron' 模块中导入 contextBridge 和 ipcRenderer
 const { contextBridge, ipcRenderer } = require('electron')
+// 从 '@electron/remote' 模块中导入 remote
 const remote = require('@electron/remote')
 const Native = {
     on: (event, callback) => {

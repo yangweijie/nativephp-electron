@@ -6,6 +6,7 @@ use RuntimeException;
 use think\console\Command;
 
 use native\thinkElectron\traits\Installer;
+use Throwable;
 use yangweijie\thinkphpPackageTools\adapter\laravel\LaravelCommand;
 use function Laravel\Prompts\confirm;
 use function Laravel\Prompts\info;
@@ -66,7 +67,7 @@ class InstallCommand extends Command
     }
 
     /**
-     * @throws \Throwable
+     * @throws Throwable
      */
     private function installComposerScript(): void
     {

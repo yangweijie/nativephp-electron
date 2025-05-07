@@ -34,7 +34,7 @@ async function retrievePhpIniSettings() {
     env
   };
 
-  return await promisify(execFile)(state.php, ['artisan', 'native:php-ini'], phpOptions);
+  return await promisify(execFile)(state.php, ['think', 'native:php-ini'], phpOptions);
 }
 
 async function retrieveNativePHPConfig() {
@@ -49,7 +49,7 @@ async function retrieveNativePHPConfig() {
         env
     };
 
-    return await promisify(execFile)(state.php, ['artisan', 'native:config'], phpOptions);
+    return await promisify(execFile)(state.php, ['think', 'native:config'], phpOptions);
 }
 
 function callPhp(args, options, phpIniSettings = {}) {
@@ -179,7 +179,7 @@ function serveApp(secret, apiPort, phpIniSettings): Promise<ProcessResult> {
     return new Promise(async (resolve, reject) => {
         const appPath = getAppPath();
 
-        console.log('Starting PHP server...', `${state.php} artisan serve`, appPath, phpIniSettings)
+        console.log('Starting PHP server...', `${state.php} think run`, appPath, phpIniSettings)
 
         ensureAppFoldersAreAvailable();
 
@@ -196,12 +196,12 @@ function serveApp(secret, apiPort, phpIniSettings): Promise<ProcessResult> {
 
         // Make sure the storage path is linked - as people can move the app around, we
         // need to run this every time the app starts
-        callPhp(['artisan', 'storage:link', '--force'], phpOptions, phpIniSettings)
+        // callPhp(['artisan', 'storage:link', '--force'], phpOptions, phpIniSettings)
 
         // Migrate the database
         if (store.get('migrated_version') !== app.getVersion() && process.env.NODE_ENV !== 'development') {
             console.log('Migrating database...')
-            callPhp(['artisan', 'migrate', '--force'], phpOptions, phpIniSettings)
+            // callPhp(['artisan', 'migrate', '--force'], phpOptions, phpIniSettings)
             store.set('migrated_version', app.getVersion())
         }
 

@@ -47,7 +47,7 @@ class DevelopCommand extends Command
 
         $this->runDeveloper(
             installer: $this->option('installer'),
-            skip_queue: $this->option('no-queue'),
+            skip_queue: true,
             withoutInteraction: $this->option('no-interaction')
         );
     }

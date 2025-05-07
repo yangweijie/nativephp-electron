@@ -103,6 +103,7 @@ if (platform.phpBinary) {
 }
 
 if (certificatePath) {
+    console.log('Copying certificate file from', certificatePath);
     try {
         let certDest = join(__dirname, 'resources', 'cacert.pem');
         copySync(certificatePath, certDest);
